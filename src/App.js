@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from "react";
+import {BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "./components/Home";
+import CharCard from "./components/CharCard";
+import LocCard from "./components/LocCard";
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from "./components/Navbar.js";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
-export default App;
+export default class Layout extends Component {
+    render() {
+        return (
+            <div>
+                <BrowserRouter>
+                 
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route exact path="/characters" component={CharCard} />
+                            <Route exact path="/locations" component={LocCard} />
+                            <Route render={() => <h1>Not Found!</h1>}/>
+
+                        </Switch>
+                    
+                    <div className="FullWrapper">
+                        <Navbar />
+
+                        <div>
+                            <div className="App">
+                                <h2>Characters From The Show</h2>
+                                <CharCard />
+                            </div>
+                            <div>
+                                <h2>Locations Of The Show</h2>
+                                <LocCard />
+                            </div>
+                        </div>
+                    </div>
+
+
+                </BrowserRouter>
+
+            </div>
+        )
+    }}
+    
